@@ -100,8 +100,10 @@ public class costCollegeDaoFive {
         System.out.println(list);
         List<Document> answer = new ArrayList<>();
         for(int i =list.size()-1;i>0;i--){
-            Document tmp = new Document("region",list.get(i).getKey()).append("Average expense",list.get(i).getValue()/usRegions.get(list.get(i).getKey()).size());
-//            System.out.println(list.get(i).getValue()/usRegions.get(list.get(i).getKey()).size());
+            float expense = list.get(i).getValue();
+            int total_state_in_region = usRegions.get(list.get(i).getKey()).size();
+            float avg_exp = expense/total_state_in_region;
+            Document tmp = new Document("region",list.get(i).getKey()).append("Average expense per state",avg_exp);
             answer.add(tmp);
         }
         MongoCollection<Document> collection_new1 = database.getCollection("EduCostStatQueryFive");
