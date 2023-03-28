@@ -33,7 +33,7 @@ public class costCollegeDaoFive {
         usRegions.put("Northeast", Arrays.asList(  "Massachusetts", "Rhode Island","Connecticut","Vermont","New Hampshire","Maine","Pennsylvania","New Jersey","New York"));
         usRegions.put("Southeast", Arrays.asList("Washington","Georgia","North Carolina","South Carolina","Virginia","West Virginia","Kentucky","Tennessee","Mississippi","Alabama","Delaware","Maryland","Florida","Louisiana","Arkansas"));
         usRegions.put("Midwest", Arrays.asList("Minnesota", "Wisconsin", "Illinois", "Ohio", "Indiana", "Michigan", "Missouri", "Iowa", "Kansas", "Nebraska", "North Dakota", "South Dakota"));
-        usRegions.put("Soutwest", Arrays.asList("New Mexico", "Arizona", "Oklahoma", "Texas"));
+        usRegions.put("Southwest", Arrays.asList("New Mexico", "Arizona", "Oklahoma", "Texas"));
         usRegions.put("West", Arrays.asList("California", "Colorado", "Nevada", "Hawaii", "Alaska", "Oregon", "Utah", "Idaho", "Montana", "Wyoming", "Washington"));
 
 
@@ -100,7 +100,8 @@ public class costCollegeDaoFive {
         System.out.println(list);
         List<Document> answer = new ArrayList<>();
         for(int i =list.size()-1;i>0;i--){
-            Document tmp = new Document("region",list.get(i).getKey()).append("expense",list.get(i).getValue());
+            Document tmp = new Document("region",list.get(i).getKey()).append("Average expense",list.get(i).getValue()/usRegions.get(list.get(i).getKey()).size());
+//            System.out.println(list.get(i).getValue()/usRegions.get(list.get(i).getKey()).size());
             answer.add(tmp);
         }
         MongoCollection<Document> collection_new1 = database.getCollection("EduCostStatQueryFive");

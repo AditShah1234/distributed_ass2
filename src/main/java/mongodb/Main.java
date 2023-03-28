@@ -39,7 +39,7 @@ public class Main {
         quarry1.quarryOne(2013,"Alabama","Private" , "4-year" ,"Fees/Tuition", database);
         System.out.println("#######################################################( TWO )##########################################################");
         quarry2.quarryTwo(2013,"Private" , "4-year" , database);
-        System.out.println("##########################################################( THREE)#######################################################");
+        System.out.println("##########################################################( THREE )#######################################################");
         quarry3.quarryThree(2013,"Private" , "4-year" , database);
         System.out.println("################################################################( FOUR )#################################################");
         quarry4.quarryFour("Private" , "4-year" , database);

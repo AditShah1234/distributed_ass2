@@ -287,7 +287,8 @@ public class costCollegeDao {
         System.out.println(list);
         List<Document> answer = new ArrayList<>();
         for(int i =list.size()-1;i>0;i--){
-            Document tmp = new Document("region",list.get(i).getKey()).append("expense",list.get(i).getValue());
+            Document tmp = new Document("region",list.get(i).getKey()).append("expense",list.get(i).getValue()/usRegions.get(list.get(i).getKey()).size());
+            System.out.println(list.get(i).getValue()/usRegions.get(list.get(i).getKey()).size());
             answer.add(tmp);
         }
         MongoCollection<Document> collection_new1 = database.getCollection("EduCostStatQueryFive");

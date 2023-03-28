@@ -41,10 +41,17 @@ public class costCollegeDaoOne {
 
 
         MongoCursor<Document> cursor = documents.iterator();
+
         while (cursor.hasNext()) {
             Document document = cursor.next();
+            MongoCollection<Document> collection_new1= database.getCollection("EduCostStatQueryOne");
+            collection_new1.drop();
+
+            collection_new1.insertOne(document);
             System.out.println(document.toJson());
         }
+
+
     }
 
 }

@@ -1,15 +1,23 @@
 syntax = "proto3";
 
 option java_multiple_files = true;
-option java_package = "example.myapp.helloworld.grpc";
-option java_outer_classname = "HelloWorldProto";
+option java_package = "org.example.rpc";
+option java_outer_classname = "Quarry1";
 
-package helloworld;
-
-message HelloRequest {
-    string firstname = 1;
+package quarry1;
+service q1 {
+     // Sends a greeting
+     rpc Q1 (Quarry1Request) returns (Quarry1Reply) {}
 }
 
-message HelloReply {
+message Quarry1Request {
+     int32 year = 1;
+     string state = 2;
+     string type = 3;
+     string length = 4;
+     string expense = 5;
+}
+
+message Quarry1Reply {
     string message = 1;
 }
