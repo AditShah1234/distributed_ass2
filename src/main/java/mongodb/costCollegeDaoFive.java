@@ -5,10 +5,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Accumulators;
-import com.mongodb.client.model.Aggregates;
-import com.mongodb.client.model.Filters;
-import com.mongodb.client.model.Sorts;
+import com.mongodb.client.model.*;
 import com.opencsv.CSVReader;
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -17,8 +14,31 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
+import org.bson.conversions.Bson;
+import java.util.Arrays;
+import java.util.List;
 
-import static com.mongodb.client.model.Indexes.descending;
+import static com.mongodb.client.model.Accumulators.avg;
+import static com.mongodb.client.model.Aggregates.facet;
+import static com.mongodb.client.model.Aggregates.match;
+import static com.mongodb.client.model.Aggregates.project;
+import static com.mongodb.client.model.Aggregates.sort;
+
+import static com.mongodb.client.model.Filters.*;
+import static com.mongodb.client.model.Projections.*;
+import static com.mongodb.client.model.Sorts.*;
+
+import static com.mongodb.client.model.Accumulators.sum;
+import static com.mongodb.client.model.Aggregates.*;
+import static com.mongodb.client.model.Filters.eq;
+import static javax.management.Query.div;
+
+
+import java.util.*;
+
 
 public class costCollegeDaoFive {
     public void quarryFive(Integer year , String type, String length, MongoDatabase database) {
@@ -49,68 +69,62 @@ public class costCollegeDaoFive {
 
 //        System.out.println(usStates);
         Bson match_string = Aggregates.match(Filters.and(
-                Filters.eq("type", type),
-                Filters.eq("length", length),
-                Filters.eq("year", year)
+                eq("type", type),
+                eq("length", length),
+                eq("year", year)
         ));
         ArrayList<Document> doc = new ArrayList<>();
         doc.add(new Document("state","$state"));
         doc.add(new Document("year", "$year"));
 
 
-        Bson groupby = Aggregates.group(doc, Accumulators.sum("totalExpense", "$value"));
+        List<Facet> facetStage =  Arrays.asList(new Facet("Northeast", Arrays.asList(
+                                match(and(eq("type", type),eq("length", length),
+                                                eq("year", year),in("state",usRegions.get("Northeast")))),
+                                group("total_expense",sum("totalExpense", "$value")),
+                                project(fields(computed("avg",new Document("$divide",Arrays.asList("$totalExpense",usRegions.get("Northeast").size()))))))
+                ),
+
+                new Facet("Southeast", Arrays.asList(
+                        match(and(eq("type", type),eq("length", length),
+                                eq("year", year),in("state",usRegions.get("Southeast")))),
+                        group("total_expense",sum("totalExpense", "$value")),
+                        project(fields(computed("avg",new Document("$divide",Arrays.asList("$totalExpense",usRegions.get("Southeast").size()))))))
+                ),
+                new Facet("Midwest", Arrays.asList(
+                        match(and(eq("type", type),eq("length", length),
+                                eq("year", year),in("state",usRegions.get("Midwest")))),
+                        group("total_expense",sum("totalExpense", "$value")),
+                        project(fields(computed("avg",new Document("$divide",Arrays.asList("$totalExpense",usRegions.get("Midwest").size()))))))
+                ),
+                new Facet("Southwest", Arrays.asList(
+                        match(and(eq("type", type),eq("length", length),
+                                eq("year", year),in("state",usRegions.get("Southwest")))),
+                        group("total_expense",sum("totalExpense", "$value")),
+                        project(fields(computed("avg",new Document("$divide",Arrays.asList("$totalExpense",usRegions.get("Southwest").size()))))))
+                ),
+            new Facet("West", Arrays.asList(
+                match(and(eq("type", type),eq("length", length),
+                        eq("year", year),in("state",usRegions.get("West")))),
+                group("total_expense",sum("totalExpense", "$value")),
+                project(fields(computed("avg",new Document("$divide",Arrays.asList("$totalExpense",usRegions.get("West").size()))))))
+        )
+        );
+        Bson f1 = facet(facetStage);
 
 
-        Bson sort_year = Aggregates.sort(Sorts.ascending("_id"));
+        List<Document> queryResult = collection.aggregate(Arrays.asList(
+                f1
+        )).into(new ArrayList<>());
+        System.out.println(queryResult);
 
-
-        List<Document> results = collection.aggregate(Arrays.asList(match_string, groupby, sort_year))
-                .into(new ArrayList<>());
-
-//        System.out.println(results.toString());
-
-        Map <String,Integer> map = new HashMap<>();
-
-
-        for (Document result : results) {
-
-
-            ArrayList<Document> tmp = (ArrayList) result.get("_id");
-
-            int amt = Integer.parseInt(result.get("totalExpense").toString());
-            String state = tmp.get(0).get("state").toString();
-
-            if (usStates.get(state) == null)
-                map.put(state, amt);
-            else {
-                if (map.containsKey(usStates.get(state))) {
-
-                    map.put(usStates.get(state), map.get(usStates.get(state)) + amt);
-                } else
-                    map.put(usStates.get(state), amt);
-            }
-        }
-
-
-
-
-        List<Map.Entry<String, Integer>> list = new ArrayList<>(map.entrySet());
-
-        list.sort(Map.Entry.comparingByValue());
-        System.out.println(list);
-        List<Document> answer = new ArrayList<>();
-        for(int i =list.size()-1;i>0;i--){
-            float expense = list.get(i).getValue();
-            int total_state_in_region = usRegions.get(list.get(i).getKey()).size();
-            float avg_exp = expense/total_state_in_region;
-            Document tmp = new Document("region",list.get(i).getKey()).append("Average expense per state",avg_exp);
-            answer.add(tmp);
-        }
         MongoCollection<Document> collection_new1 = database.getCollection("EduCostStatQueryFive");
         collection_new1.drop();
 
-        collection_new1.insertMany(answer);
+        collection_new1.insertMany(queryResult);
 
     }
+
+
 }
 
