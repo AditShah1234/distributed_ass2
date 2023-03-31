@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "example.costCollegeDaoFour.grpc";
+option java_outer_classname = "QueryFour";
+
+package example.costCollegeDaoFour.grpc;
+
+service DaoFour {
+  rpc getQueryFour(CostCollegeDaoFourRequest) returns (CostCollegeDaoFourResponse) {}
+}
+
+message CostCollegeDaoFourRequest {
+  string type = 1;
+  string length = 2;
+}
+
+message CostCollegeDaoFourResponse {
+  string message = 1;
+}
