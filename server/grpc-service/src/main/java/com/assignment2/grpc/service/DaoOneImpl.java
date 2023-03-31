@@ -17,17 +17,17 @@ public class DaoOneImpl extends DaoOneGrpc.DaoOneImplBase{
         String state = request.getState();
         String type = request.getType();
         String length = request.getLength();
-        String DaoOnexpense = request.getExpense();
+        String expense = request.getExpense();
         String out;
         System.out.println("Year: " + year);
         System.out.println("State: " + state);
         System.out.println("Type: " + type);
         System.out.println("Length: " + length);
-        System.out.println("Expense: " + DaoOnexpense);
+        System.out.println("Expense: " + expense);
         costCollegeDaoOne quarry1 = new costCollegeDaoOne();
         try {
 
-            out= quarry1.quarryOne(year, state, type, length, DaoOnexpense);
+            out= quarry1.quarryOne(year, state, type, length, expense);
             System.out.println(out);
         }catch (Exception e){
             out= "Error "+e.toString();

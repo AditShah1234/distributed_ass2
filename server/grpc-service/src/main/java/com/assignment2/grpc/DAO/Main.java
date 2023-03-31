@@ -22,7 +22,7 @@ public class Main {
         Logger.getLogger("org.mongodb.driver").setLevel(Level.WARNING);
         costCollegeDao quarry = new costCollegeDao();
         costCollegeDaoOne quarry1 = new costCollegeDaoOne();
-//        costCollegeDaoTwo quarry2 = new costCollegeDaoTwo();
+        costCollegeDaoTwo quarry2 = new costCollegeDaoTwo();
 //        costCollegeDaoThree quarry3 = new costCollegeDaoThree();
 //        costCollegeDaoFour quarry4 = new costCollegeDaoFour();
 //        costCollegeDaoFive quarry5 = new costCollegeDaoFive();
@@ -32,7 +32,7 @@ public class Main {
         String s = quarry1.quarryOne(2013,"Alabama","Private" , "4-year" ,"Fees/Tuition");
 
 //        System.out.println("#######################################################( TWO )##########################################################");
-//        quarry2.quarryTwo(2013,"Private" , "4-year" );
+        quarry2.quarryTwo(2013,"Private" , "4-year" );
 //        System.out.println("##########################################################( THREE )#######################################################");
 //        quarry3.quarryThree(2013,"Private" , "4-year" );
 //        System.out.println("################################################################( FOUR )#################################################");

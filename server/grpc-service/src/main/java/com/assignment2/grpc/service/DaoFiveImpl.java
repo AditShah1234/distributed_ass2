@@ -1,5 +1,6 @@
 package com.assignment2.grpc.service;
 
+import com.assignment2.grpc.DAO.costCollegeDaoFive;
 import example.costCollegeDaoFive.grpc.CostCollegeDaoFiveRequest;
 import example.costCollegeDaoFive.grpc.CostCollegeDaoFiveResponse;
 import example.costCollegeDaoFive.grpc.DaoFiveGrpc;
@@ -16,9 +17,17 @@ public class DaoFiveImpl extends DaoFiveGrpc.DaoFiveImplBase{
 
         System.out.println("Type: " + type);
         System.out.println("Length: " + length);
+        costCollegeDaoFive quarry5 = new costCollegeDaoFive();
+        String out;
+        try {
+            quarry5.quarryFive(2021,type,length);
+            out= "Done";
+        }catch (Exception e){
+            out ="Error "+ e;
+        }
 
         CostCollegeDaoFiveResponse costCollegeDaoFiveResponse=CostCollegeDaoFiveResponse.newBuilder()
-                .setMessage("Type " +type+ ":")
+                .setMessage(out)
                 .build();
         responseObserver.onNext(costCollegeDaoFiveResponse);
         responseObserver.onCompleted();

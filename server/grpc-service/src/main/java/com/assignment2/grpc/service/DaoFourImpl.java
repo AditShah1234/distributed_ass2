@@ -1,5 +1,7 @@
 package com.assignment2.grpc.service;
 
+import com.assignment2.grpc.DAO.costCollegeDaoFour;
+import com.assignment2.grpc.DAO.costCollegeDaoThree;
 import example.costCollegeDaoFour.grpc.CostCollegeDaoFourRequest;
 import example.costCollegeDaoFour.grpc.CostCollegeDaoFourResponse;
 import example.costCollegeDaoFour.grpc.DaoFourGrpc;
@@ -17,8 +19,18 @@ public class DaoFourImpl extends DaoFourGrpc.DaoFourImplBase{
         System.out.println("Type: " + type);
         System.out.println("Length: " + length);
 
+
+        costCollegeDaoFour quarry4 = new costCollegeDaoFour();
+        String out;
+        try {
+            quarry4.quarryFour(type, length,"3");
+            out= "Done";
+        }catch (Exception e){
+            out ="Error "+ e;
+        }
+
         CostCollegeDaoFourResponse costCollegeDaoFourResponse=CostCollegeDaoFourResponse.newBuilder()
-                .setMessage("Year " +type+ ":")
+                .setMessage(out)
                 .build();
         responseObserver.onNext(costCollegeDaoFourResponse);
         responseObserver.onCompleted();
