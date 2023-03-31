@@ -18,6 +18,7 @@ private static final long serialVersionUID = 0L;
   private CostCollegeDaoFourRequest() {
     type_ = "";
     length_ = "";
+    duration_ = "";
   }
 
   @java.lang.Override
@@ -60,6 +61,12 @@ private static final long serialVersionUID = 0L;
             java.lang.String s = input.readStringRequireUtf8();
 
             length_ = s;
+            break;
+          }
+          case 26: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            duration_ = s;
             break;
           }
           default: {
@@ -170,6 +177,44 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int DURATION_FIELD_NUMBER = 3;
+  private volatile java.lang.Object duration_;
+  /**
+   * <code>string duration = 3;</code>
+   * @return The duration.
+   */
+  @java.lang.Override
+  public java.lang.String getDuration() {
+    java.lang.Object ref = duration_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      duration_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string duration = 3;</code>
+   * @return The bytes for duration.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getDurationBytes() {
+    java.lang.Object ref = duration_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      duration_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -190,6 +235,9 @@ private static final long serialVersionUID = 0L;
     if (!getLengthBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 2, length_);
     }
+    if (!getDurationBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, duration_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -204,6 +252,9 @@ private static final long serialVersionUID = 0L;
     }
     if (!getLengthBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, length_);
+    }
+    if (!getDurationBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, duration_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -224,6 +275,8 @@ private static final long serialVersionUID = 0L;
         .equals(other.getType())) return false;
     if (!getLength()
         .equals(other.getLength())) return false;
+    if (!getDuration()
+        .equals(other.getDuration())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -239,6 +292,8 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getType().hashCode();
     hash = (37 * hash) + LENGTH_FIELD_NUMBER;
     hash = (53 * hash) + getLength().hashCode();
+    hash = (37 * hash) + DURATION_FIELD_NUMBER;
+    hash = (53 * hash) + getDuration().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -376,6 +431,8 @@ private static final long serialVersionUID = 0L;
 
       length_ = "";
 
+      duration_ = "";
+
       return this;
     }
 
@@ -404,6 +461,7 @@ private static final long serialVersionUID = 0L;
       example.costCollegeDaoFour.grpc.CostCollegeDaoFourRequest result = new example.costCollegeDaoFour.grpc.CostCollegeDaoFourRequest(this);
       result.type_ = type_;
       result.length_ = length_;
+      result.duration_ = duration_;
       onBuilt();
       return result;
     }
@@ -458,6 +516,10 @@ private static final long serialVersionUID = 0L;
       }
       if (!other.getLength().isEmpty()) {
         length_ = other.length_;
+        onChanged();
+      }
+      if (!other.getDuration().isEmpty()) {
+        duration_ = other.duration_;
         onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
@@ -637,6 +699,82 @@ private static final long serialVersionUID = 0L;
   checkByteStringIsUtf8(value);
       
       length_ = value;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object duration_ = "";
+    /**
+     * <code>string duration = 3;</code>
+     * @return The duration.
+     */
+    public java.lang.String getDuration() {
+      java.lang.Object ref = duration_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        duration_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string duration = 3;</code>
+     * @return The bytes for duration.
+     */
+    public com.google.protobuf.ByteString
+        getDurationBytes() {
+      java.lang.Object ref = duration_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        duration_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string duration = 3;</code>
+     * @param value The duration to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDuration(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      duration_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string duration = 3;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearDuration() {
+      
+      duration_ = getDefaultInstance().getDuration();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string duration = 3;</code>
+     * @param value The bytes for duration to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDurationBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      duration_ = value;
       onChanged();
       return this;
     }

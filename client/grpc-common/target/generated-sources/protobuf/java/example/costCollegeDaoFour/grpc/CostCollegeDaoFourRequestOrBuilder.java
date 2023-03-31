@@ -30,4 +30,16 @@ public interface CostCollegeDaoFourRequestOrBuilder extends
    */
   com.google.protobuf.ByteString
       getLengthBytes();
+
+  /**
+   * <code>string duration = 3;</code>
+   * @return The duration.
+   */
+  java.lang.String getDuration();
+  /**
+   * <code>string duration = 3;</code>
+   * @return The bytes for duration.
+   */
+  com.google.protobuf.ByteString
+      getDurationBytes();
 }

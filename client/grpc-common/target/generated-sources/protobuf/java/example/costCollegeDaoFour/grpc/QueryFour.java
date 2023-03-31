@@ -34,15 +34,15 @@ public final class QueryFour {
   static {
     java.lang.String[] descriptorData = {
       "\n\030costCollegeDaoFour.proto\022\037example.cost" +
-      "CollegeDaoFour.grpc\"9\n\031CostCollegeDaoFou" +
-      "rRequest\022\014\n\004type\030\001 \001(\t\022\016\n\006length\030\002 \001(\t\"-" +
-      "\n\032CostCollegeDaoFourResponse\022\017\n\007message\030" +
-      "\001 \001(\t2\225\001\n\007DaoFour\022\211\001\n\014getQueryFour\022:.exa" +
-      "mple.costCollegeDaoFour.grpc.CostCollege" +
-      "DaoFourRequest\032;.example.costCollegeDaoF" +
-      "our.grpc.CostCollegeDaoFourResponse\"\000B.\n" +
-      "\037example.costCollegeDaoFour.grpcB\tQueryF" +
-      "ourP\001b\006proto3"
+      "CollegeDaoFour.grpc\"K\n\031CostCollegeDaoFou" +
+      "rRequest\022\014\n\004type\030\001 \001(\t\022\016\n\006length\030\002 \001(\t\022\020" +
+      "\n\010duration\030\003 \001(\t\"-\n\032CostCollegeDaoFourRe" +
+      "sponse\022\017\n\007message\030\001 \001(\t2\225\001\n\007DaoFour\022\211\001\n\014" +
+      "getQueryFour\022:.example.costCollegeDaoFou" +
+      "r.grpc.CostCollegeDaoFourRequest\032;.examp" +
+      "le.costCollegeDaoFour.grpc.CostCollegeDa" +
+      "oFourResponse\"\000B.\n\037example.costCollegeDa" +
+      "oFour.grpcB\tQueryFourP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -53,7 +53,7 @@ public final class QueryFour {
     internal_static_example_costCollegeDaoFour_grpc_CostCollegeDaoFourRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_example_costCollegeDaoFour_grpc_CostCollegeDaoFourRequest_descriptor,
-        new java.lang.String[] { "Type", "Length", });
+        new java.lang.String[] { "Type", "Length", "Duration", });
     internal_static_example_costCollegeDaoFour_grpc_CostCollegeDaoFourResponse_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_example_costCollegeDaoFour_grpc_CostCollegeDaoFourResponse_fieldAccessorTable = new

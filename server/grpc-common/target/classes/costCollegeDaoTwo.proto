@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "example.costCollegeDaoTwo.grpc";
+option java_outer_classname = "QueryTwo";
+
+package example.costCollegeDaoTwo.grpc;
+
+service DaoTwo {
+  rpc getQueryTwo(CostCollegeDaoTwoRequest) returns (CostCollegeDaoTwoResponse){}
+}
+
+message CostCollegeDaoTwoRequest {
+  int32 year = 1;
+  string type = 2;
+  string length = 3;
+}
+
+message CostCollegeDaoTwoResponse {
+  string message = 1;
+}

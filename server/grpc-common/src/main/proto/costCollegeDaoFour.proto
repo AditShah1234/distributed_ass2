@@ -13,6 +13,7 @@ service DaoFour {
 message CostCollegeDaoFourRequest {
   string type = 1;
   string length = 2;
+  string duration = 3;
 }
 
 message CostCollegeDaoFourResponse {
