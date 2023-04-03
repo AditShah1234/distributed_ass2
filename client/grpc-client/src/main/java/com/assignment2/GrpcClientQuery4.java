@@ -11,7 +11,7 @@ public class GrpcClientQuery4 {
 
     public static void main(String[] args) {
         System.out.println("Hello world!");
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9090)
+        ManagedChannel channel = ManagedChannelBuilder.forAddress("34.125.125.21", 9090)
                 .usePlaintext()
                 .build();
 
