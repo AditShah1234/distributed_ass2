@@ -65,10 +65,6 @@ public class costCollegeDaoFive {
                 usStates.put(state, region);
             }
         }
-
-
-
-//        System.out.println(usStates);
         Bson match_string = Aggregates.match(Filters.and(
                 eq("type", type),
                 eq("length", length),
@@ -82,32 +78,32 @@ public class costCollegeDaoFive {
         List<Facet> facetStage =  Arrays.asList(new Facet("Northeast", Arrays.asList(
                                 match(and(eq("type", type),eq("length", length),
                                                 eq("year", year),in("state",usRegions.get("Northeast")))),
-                                group("total_expense",sum("totalExpense", "$value")),
+                                group("avg expense per state",sum("totalExpense", "$value")),
                                 project(fields(computed("avg",new Document("$divide",Arrays.asList("$totalExpense",usRegions.get("Northeast").size()))))))
                 ),
 
                 new Facet("Southeast", Arrays.asList(
                         match(and(eq("type", type),eq("length", length),
                                 eq("year", year),in("state",usRegions.get("Southeast")))),
-                        group("total_expense",sum("totalExpense", "$value")),
+                        group("avg expense per state",sum("totalExpense", "$value")),
                         project(fields(computed("avg",new Document("$divide",Arrays.asList("$totalExpense",usRegions.get("Southeast").size()))))))
                 ),
                 new Facet("Midwest", Arrays.asList(
                         match(and(eq("type", type),eq("length", length),
                                 eq("year", year),in("state",usRegions.get("Midwest")))),
-                        group("total_expense",sum("totalExpense", "$value")),
+                        group("avg expense per state",sum("totalExpense", "$value")),
                         project(fields(computed("avg",new Document("$divide",Arrays.asList("$totalExpense",usRegions.get("Midwest").size()))))))
                 ),
                 new Facet("Southwest", Arrays.asList(
                         match(and(eq("type", type),eq("length", length),
                                 eq("year", year),in("state",usRegions.get("Southwest")))),
-                        group("total_expense",sum("totalExpense", "$value")),
+                        group("avg expense per state",sum("totalExpense", "$value")),
                         project(fields(computed("avg",new Document("$divide",Arrays.asList("$totalExpense",usRegions.get("Southwest").size()))))))
                 ),
             new Facet("West", Arrays.asList(
                 match(and(eq("type", type),eq("length", length),
                         eq("year", year),in("state",usRegions.get("West")))),
-                group("total_expense",sum("totalExpense", "$value")),
+                group("avg expense per state",sum("totalExpense", "$value")),
                 project(fields(computed("avg",new Document("$divide",Arrays.asList("$totalExpense",usRegions.get("West").size()))))))
         )
         );
